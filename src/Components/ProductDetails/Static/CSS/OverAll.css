@@ -1,0 +1,10 @@
+.Card_bodys{
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Card_bodys h1{
+    color: blueviolet;
+    box-shadow: 20px 10px 5px 5px black;
+}
