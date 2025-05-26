@@ -3,15 +3,15 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+   "homepage": "https://github.com/Marichandran73/MiniAmazon.git",
   "scripts": {
     "dev": "vite",
     "lint": "eslint .",
+    "build": "vite build",
     "preview": "vite preview",
-    "homepage": "https://github.com/Marichandran73/MiniAmazon.git",
      "start": "react-scripts start",
-     "build": "react-scripts build",
      "predeploy": "npm run build",
-     "deploy": "gh-pages -d build"
+     "deploy": "gh-pages -d dist" 
 
   },
   "dependencies": {
