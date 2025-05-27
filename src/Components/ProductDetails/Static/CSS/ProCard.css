@@ -32,7 +32,7 @@
 }
 .product-card {
   flex: 0 1 calc(25% - 1.5rem); 
-  min-width: 300px;
+  min-width: 301px;
   padding: 20px;
 
   &:hover{
