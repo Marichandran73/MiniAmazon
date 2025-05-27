@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaSearch, FaMapMarkerAlt, FaShoppingCart } from 'react-icons/fa';
 import './NavbarStyles.css';
+import { FaCartShopping } from "react-icons/fa6";
 
 import logo1 from "../assets/images/Shop-Logo.jpg";
 
@@ -45,7 +46,7 @@ const MyNavbar = ({ search, num, onCartClick }) => {
         
       </div>
       <div className="menu-item cart-icon">
-          <FaShoppingCart onClick={onCartClick} />
+          <FaCartShopping  onClick={onCartClick} />
           <h6 className="head-count">{num}</h6>
         </div>
     </div>

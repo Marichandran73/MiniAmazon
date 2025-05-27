@@ -17,20 +17,21 @@ const CartSidebar = lazy(() => import('./Components/ProductDetails/CardSidebar')
 const App = () => {
   return (
     <CartProvider>
-      <Router>
-        <Suspense fallback={<div>Loading...</div>}>
-          <Routes>
-            <Route path="/Navbar" element={<Navbars />} />
-            <Route path="/" element={<SignupLogin />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/product/:id" element={<ProductPage />} />
-            <Route path="/SubProduct/:id" element={<SubProduct />} />
-            <Route path="/cart" element={<CartSidebar />} />
-            <Route path="*" element={<h1>404 Not Found</h1>} />
-          </Routes>
-        </Suspense>
-      </Router>
-    </CartProvider>
+  <Router>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Navbars /> 
+      <Routes>
+        <Route path="/" element={<SignupLogin />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/product/:id" element={<ProductPage />} />
+        <Route path="/subproduct/:id" element={<SubProduct />} />
+        <Route path="/cart" element={<CartSidebar />} />
+        <Route path="*" element={<h1>404 Not Found</h1>} />
+      </Routes>
+    </Suspense>
+  </Router>
+</CartProvider>
+
   );
 };
 

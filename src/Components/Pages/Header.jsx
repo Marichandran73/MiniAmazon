@@ -9,18 +9,18 @@ const Header = () => {
   const links = [
     { label: 'Mobiles' },
     { label: 'Fashion', to: "/product/Women'sSaree" },
-    { label: 'Electronics' },
+    { label: 'Electronics', to: "/product/AirConditioner" },
     { label: 'Home & Kitchen' },
-    { label: 'Appliances' },
+    { label: 'Appliances', to: "/product/WashingMachine" },
     { label: 'Books', to: "/product/OpenBook" },
-    { label: 'Beauty' },
+    { label: 'Beauty', to: "/product/Women'sSaree" },
     { label: 'Toy', to: "/product/ToySet" },
-    { label: 'Watches' },
+    { label: 'MenWears', to:"/product/Men'sJeans" },
     { label: 'Shoes', to: "/product/Men'sShoes" },
     { label: 'Computers' },
-    { label: 'Sports', to: "/product/Sports" },
+    { label: 'Sports'},
     { label: 'Gift Ideas' },
-    { label: 'Amazon Pay' },
+    { label: 'Play things' },
   ];
 
   return (
@@ -34,7 +34,7 @@ const Header = () => {
             to ? (
               <Link key={index} className="sub-link" to={to}>{label}</Link>
             ) : (
-              <div key={index} className="sub-link">{label}</div>
+              <div key={index} className="sub-link">{label}</div> 
             )
           ))}
         </div>

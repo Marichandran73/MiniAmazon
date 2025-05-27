@@ -27,12 +27,13 @@
 .head-card {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 20px;
   justify-content: flex-start; 
 }
 .product-card {
   flex: 0 1 calc(25% - 1.5rem); 
-  min-width: 250px;
+  min-width: 300px;
+  padding: 20px;
 
   &:hover{
   transform: translateY(-5px);
@@ -70,23 +71,49 @@
 .product-card del {
   color:red;
 }
+.add-btn{
+  background-color: #0d6efd;
+  color: white;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  margin: 10px 0px 0px 10px;
+  &:hover {
+    background-color: #0b5ed7;
+  }
+}
 
  @media Screen and (max-width:600px){
-  .product-card{
- flex: 0 2 calc(100% - 1.5rem); 
- min-width: 50%;
- margin: auto;
-
+  
+  .product-card {
+  flex: 0 0.7 calc(50% - 1.5rem); 
+  padding: 20px;
+  &:hover{
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
   }
+}
+
   
  }
  @media Screen and (max-width:575px){
   .product-card{
   flex: 1 3 calc(30% - 1.5rem); 
-  /* min-width: 30%; */
   margin: auto;
   }
-  
+ }
+
+
+ @media Screen and (max-width:767px){
+  .product-card{
+       align-items: center;
+       justify-content:center ;
+       margin: auto;
+  }
  }
  
 
