@@ -1,17 +1,17 @@
 /* Card.css */
 
 .Pant-card {
-  max-width: 1500px;
+  max-width: 1600px;
   margin: 0 auto;
   padding: 50px 24px 24px 24px;
   background-color: #fafafa;
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+  grid-template-columns: repeat(2, 1fr); 
   gap: 24px;
-  justify-items: center;  
+  justify-items: center;
 }
 .card {
-  /* width: 100%;  */
+  width: 100%; 
   width: 350px; 
   background-color: #fff;
   border-radius: 12px;
@@ -82,7 +82,7 @@
 
 .pro-card {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1400px;
   background-color: #fff;
   border-radius: 8px;
   padding: 20px;

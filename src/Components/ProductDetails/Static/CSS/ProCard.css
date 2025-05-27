@@ -2,7 +2,7 @@
   padding: 2rem;
   margin-top: 30px;
   background-color: #f9f9f9;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin-top: 80px;
    text-align: start; 
@@ -27,7 +27,7 @@
 .head-card {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.5rem;
+  gap: 2rem;
   justify-content: flex-start; 
 }
 .product-card {
@@ -71,5 +71,22 @@
   color:red;
 }
 
+ @media Screen and (max-width:600px){
+  .product-card{
+ flex: 0 2 calc(100% - 1.5rem); 
+ min-width: 50%;
+ margin: auto;
 
+  }
+  
+ }
+ @media Screen and (max-width:575px){
+  .product-card{
+  flex: 1 3 calc(30% - 1.5rem); 
+  /* min-width: 30%; */
+  margin: auto;
+  }
+  
+ }
+ 
 

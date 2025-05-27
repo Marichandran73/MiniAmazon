@@ -22,14 +22,13 @@ const CartSidebar = ({ isOpen, closeCart, cartItems ,saveBill, totalBill}) => {
             <div className="cart-item" key={index}>
 
               <img src={item.urls} alt={item.name} />
-              <div>
+              
+                <div className="bill-total">
                 <p>{item.name}</p>
                 <p>₹{item.price} × {item.quantity} </p> 
-                <div className="bill-total">
 
-                 
-          </div>
-              </div>
+                 </div>
+              
               
            
             </div>

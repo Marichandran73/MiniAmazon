@@ -18,7 +18,7 @@ const Header = () => {
     { label: 'Watches' },
     { label: 'Shoes', to: "/product/Men'sShoes" },
     { label: 'Computers' },
-    { label: 'Sports', to: "/product/" },
+    { label: 'Sports', to: "/product/Sports" },
     { label: 'Gift Ideas' },
     { label: 'Amazon Pay' },
   ];
@@ -27,7 +27,7 @@ const Header = () => {
     <>
       <div className="header-bar">
         <div className="hamburger-icon" onClick={() => setMenuOpen(!menuOpen)}>
-          <FaBars /> All
+          <FaBars /> 
         </div>
         <div className="header-links">
           {links.map(({ label, to }, index) => (

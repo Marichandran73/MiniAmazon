@@ -24,7 +24,7 @@
   padding: 2rem;
   border-radius: 1rem;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  max-width: 900px;
+  max-width: 85%;
   margin: 0 auto;
   gap: 2rem;
 }
@@ -112,3 +112,99 @@
   &:hover{
     background-color: #0056b3;
   }}
+
+  /* Base styles already apply to large screens (1200px and up) */
+
+/* Large desktops and laptops (min-width: 1200px) */
+@media screen and (min-width: 1200px) {
+  .Sub-Head {
+    padding: 2rem;
+    min-width: 1200px;
+  }
+
+  .sub-Card {
+    flex-direction: row;
+    gap: 2rem;
+  }
+
+  .Sub-left,
+  .Sub-right {
+    flex: 1 1 45%;
+  }
+}
+
+/* Medium devices (tablets & small laptops - 768px to 1199px) */
+@media screen and (max-width: 1199px) and (min-width: 768px) {
+  .Sub-Head {
+    padding: 1.5rem;
+    min-width: 100%;
+  }
+
+  .sub-Card {
+    flex-direction: row;
+    gap: 1.5rem;
+  }
+
+  .Sub-left,
+  .Sub-right {
+    flex: 1 1 48%;
+  }
+
+  .Sub-left img {
+    width: 100%;
+  }
+}
+
+/* Small devices (large phones - 501px to 767px) */
+@media screen and (max-width: 767px) and (min-width: 501px) {
+  .Sub-Head {
+    padding: 1.2rem;
+    min-width: 100%;
+  }
+
+  .sub-Card {
+    flex-direction: column;
+    width: 95%;
+    margin: auto;
+    gap: 1rem;
+  }
+
+  .Sub-left,
+  .Sub-right {
+    width: 100%;
+  }
+
+  .Sub-left img {
+    width: 100%;
+  }
+}
+
+/* Extra small devices (phones - 500px and below) */
+@media screen and (max-width: 500px) {
+  .Sub-Head {
+    padding: 1rem;
+    min-width: 100%;
+  }
+
+  .sub-Card {
+    flex-direction: column;
+    width: 90%;
+    margin: auto;
+    gap: 1rem;
+  }
+
+  .Sub-left,
+  .Sub-right {
+    width: 100%;
+    text-align: center;
+  }
+
+  .Sub-left img {
+    width: 100%;
+  }
+
+  .add-btn {
+    min-width: 100%;
+  }
+}
+

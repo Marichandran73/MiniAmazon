@@ -10,7 +10,6 @@
   "preview": "vite preview",
   "predeploy": "npm run build"
  
-
   },
   "dependencies": {
     "bootstrap": "^5.3.6",
