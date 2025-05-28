@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './Components/Pages/SignupLogin.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { CartProvider } from './Context/CartContext.jsx';
+import { CartProvider } from './context/CartContext.jsx';
 
 // Lazy-loaded components
 const Dashboard = lazy(() => import('./Dashboard'));
