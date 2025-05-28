@@ -19,7 +19,6 @@ const App = () => {
     <CartProvider>
   <Router>
     <Suspense fallback={<div>Loading...</div>}>
-      <Navbars /> 
       <Routes>
         <Route path="/" element={<SignupLogin />} />
         <Route path="/dashboard" element={<Dashboard />} />
