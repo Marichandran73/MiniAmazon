@@ -13,7 +13,6 @@ const MyNavbar = ({ search, num, onCartClick }) => {
         <img
           src={logo1}
           alt="Company Logo"
-          loading="lazy"
         />
       </div>
 

@@ -66,7 +66,6 @@ const ProductPage = () => {
                     src={product.urls}
                     onClick={() => handleClick(product)}
                     alt={product.name}
-                    loading="lazy"
                   />
 
                   <h4>{product.name}</h4>
