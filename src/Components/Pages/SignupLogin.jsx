@@ -59,6 +59,7 @@ const SignupLogin = () => {
   };
 
   return (
+    <div className="formBody">
     <form onSubmit={handleSubmit}>
       <h1>{isLogin ? 'Login' : 'Signup'}</h1>
 
@@ -122,6 +123,8 @@ const SignupLogin = () => {
         </button>
       </p>
     </form>
+
+    </div>
   );
 };
 

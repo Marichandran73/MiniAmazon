@@ -22,8 +22,8 @@ const App = () => {
       <Router>
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
-            <Route path="/" element={<SignupLogin />} />
-            <Route path="/dashboard" element={<ErrorBoundry><Dashboard /></ErrorBoundry>} />
+            <Route path="/Signup" element={<SignupLogin />} />
+            <Route path="/" element={<ErrorBoundry><Dashboard /></ErrorBoundry>} />
             <Route path="/product/:id" element={<ErrorBoundry><ProductPage /></ErrorBoundry>} />
             <Route path="/subproduct/:id" element={<ErrorBoundry><SubProduct /></ErrorBoundry>} />
             <Route path="/cart" element={<ErrorBoundry><CartSidebar /></ErrorBoundry>} />

@@ -1,12 +1,23 @@
 /* Form Container */
+.formBody{
+  background-image: url('../../assets/images/img1.jpg');
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  background-position-y:-120px;
+  background-size: cover;
+}
 form {
   width: 350px;
-  margin: 50px auto;
-  padding: 25px;
+  padding: 35px;
   border: 1px solid #ccc;
   border-radius: 10px;
-  background-color: #fefefe;
+  background-color: #f9f9f9;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 3px ;
+  z-index: 999;
 }
 
 /* Form Title */

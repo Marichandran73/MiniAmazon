@@ -25,6 +25,7 @@ const ProductPage = () => {
     closeCart,
     saveBill,
     totalBill,
+    handleQuantityChange
   } = useCart();
 
   const selectedItem = Static2.flatMap((section) => section.images || []).find(
@@ -40,6 +41,13 @@ const ProductPage = () => {
       alert('Product ID not found');
     }
   };
+
+
+const calculateTotal = (items) => {
+  return items.reduce((total, item) => total + item.price * item.quantity, 0);
+};
+
+
 
   return (
     <>
@@ -90,15 +98,18 @@ const ProductPage = () => {
         </div>
       </div>
 
-      <Footer />
-
-      <CartSidebar
+       <CartSidebar
         isOpen={isCartOpen}
         closeCart={closeCart}
         cartItems={cartItems}
         saveBill={saveBill}
-        totalBill={totalBill}
+        totalBill={calculateTotal(cartItems)}
+        onQuantityChange={handleQuantityChange}
       />
+
+      <Footer />
+
+     
     </>
   );
 };

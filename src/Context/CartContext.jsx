@@ -8,6 +8,8 @@ export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
+ 
+
   const openCart = useCallback(() => {
     setIsCartOpen(true);
   }, []);
@@ -44,6 +46,20 @@ export const CartProvider = ({ children }) => {
     );
   }, [cartItems]);
 
+
+
+  const handleQuantityChange = (itemId, change) => {
+  setCartItems(prevCart =>
+    prevCart.map(item =>
+      item.id === itemId
+        ? { ...item, quantity: Math.max(item.quantity + change, 1) }
+        : item
+    )
+  );
+};
+
+
+
   return (
     <CartContext.Provider
       value={{
@@ -54,6 +70,7 @@ export const CartProvider = ({ children }) => {
         closeCart,
         saveBill,
         totalBill,
+        handleQuantityChange,
       }}
     >
       {children}

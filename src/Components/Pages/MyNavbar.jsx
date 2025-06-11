@@ -3,10 +3,18 @@ import { FaSearch, FaMapMarkerAlt, FaShoppingCart } from 'react-icons/fa';
 import './NavbarStyles.css';
 import { FaCartShopping } from "react-icons/fa6";
 
+import { useNavigate} from 'react-router-dom';
+
+import Button from 'react-bootstrap/Button';
+
 import logo1 from "../assets/images/Shop-Logo.jpg";
 
 
 const MyNavbar = ({ search, num, onCartClick }) => {
+  const navigate = useNavigate();
+   const SwitchSignup =()=>{
+    navigate("/Signup");
+   }
   return (
     <div className="navbar">
       <div className="logo">
@@ -32,9 +40,14 @@ const MyNavbar = ({ search, num, onCartClick }) => {
         />
         <button><FaSearch /></button>
       </div>
+      {/* <div>
+        <Button variant="danger">SignUp</Button>
+      </div> */}
 
       <div className="right-menu">
+        <Button variant="danger" onClick={ SwitchSignup }>SignUp</Button>
         <div className="menu-item">
+
           <span className="small-text">Hello, Sign in</span>
           <span className="bold-text">Account & Lists</span>
         </div>

@@ -60,7 +60,7 @@ const Dashboard = () => {
       title={section.title} 
       description={section.description} 
       images={section.images} 
-      caption={section.caption}  /> 
+      caption={section.caption} /> 
   ))}
 </div>
 
