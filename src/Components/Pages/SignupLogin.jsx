@@ -47,7 +47,7 @@ const SignupLogin = () => {
       if (isLogin) {
         alert('Login successful');
         console.log('Login Data:', formData);
-        navigate('/dashboard'); 
+        navigate('/'); 
       } else {
         alert('Signup successful');
         console.log('Signup Data:', formData);

@@ -28,8 +28,8 @@ const CartSidebar = ({ isOpen, closeCart, cartItems, saveBill, totalBill, onQuan
                 <p>{item.name}</p>
                 <div className="sub-bill-total">
                   <p>₹{item.price} × {item.quantity}</p>
-                  <button className="btn2" onClick={() => handleAddItem(item.id)}>+</button>
-                  <button className="btn2" onClick={() => handleSubItem(item.id)}>-</button>
+                  <button className="btn2 incre-btn" onClick={() => handleAddItem(item.id)}>+</button>
+                  <button className="btn2 incre-btn" onClick={() => handleSubItem(item.id)}>-</button>
                 </div>
               </div>
             </div>
