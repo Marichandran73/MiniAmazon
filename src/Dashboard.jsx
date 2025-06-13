@@ -56,8 +56,7 @@ const Dashboard = () => {
     <div className="Container">
   
     <div className="second">
-        <h1>WELCOME TO My shoping platform </h1>
-
+        <h1>WELCOME TO StyleMart </h1>
         <h3>The Date is: {currDate}</h3> 
     </div>
   
