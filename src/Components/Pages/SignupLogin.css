@@ -68,11 +68,12 @@ form button[type="submit"] {
   cursor: pointer;
   margin-top: 10px;
   transition: background-color 0.3s ease;
+  &:hover{
+   background-color: #0056b3;
+  }
 }
 
-form button[type="submit"]:hover {
-  background-color: #0056b3;
-}
+
 
 /* Toggle Button */
 form button[type="button"] {
@@ -98,104 +99,55 @@ form p {
 
 
 
-.second h1 {
-    text-shadow: 10px 10px 30px #1ef617 !important;
-    color: #2707df !important;
- 
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
+
 
 .Container {
   position: relative;
-  min-height: 80vh;
-  overflow: hidden;
-}
-
-.Container figure {
-  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 100%;
+  height: 90vh; 
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   background-size: cover;
   background-position: center;
-  opacity: 0;
-  animation: fadeInOut 28s infinite;
-  transition: all 0.5s ease-in-out;
-}
-
-.Container figure:nth-child(1) {
-  background-image: url(../assets/images/Products1.webp);
-  animation-delay: 0s;
-}
-.Container figure:nth-child(2) {
-  background-image: url(../assets/images/products2.jpg);
-  animation-delay: 4s;
-}
-.Container figure:nth-child(3) {
-  background-image: url(../assets/images/products3.jpg);
-  animation-delay: 8s;
-}
-.Container figure:nth-child(4) {
-  background-image: url(../assets/images/products4.jpg);
-  animation-delay: 12s;
-}
-.Container figure:nth-child(5) {
-  background-image: url(../assets/images/products5.jpg);
-  animation-delay: 16s;
-}
-.Container figure:nth-child(6) {
-  background-image: url(../assets/images/products7.jpg);
-  animation-delay: 20s;
-}
-.Container figure:nth-child(7) {
-  background-image: url(../assets/images/products6.jpg);
-  animation-delay: 24s;
-}
-
-/* Responsive media queries */
-@media screen and (max-width: 768px) {
-  .Container {
-    min-height: 60vh;
-  }
-
-  .Container figure {
-    background-position: center center;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .Container {
-    min-height: 50vh;
-  }
-
-  .Container figure {
-    background-position: center center;
-  }
+  animation: bgAnimation 15s infinite;
+  transition: background-image 1s ease-in-out;
+  z-index: 0;
 }
 
 
-@keyframes fadeInOut {
-  0% {
-    opacity: 0;
-  }
-  8% {
-    opacity: 1;
-  }
-  16% {
-    opacity: 0.9;
-  }
-  25% {
-    opacity: 0;
-  }50%{
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
+.second {
+ position: absolute;
+ top: 50%;
+ left: 40%;
 }
 
-.second{
-    position:relative;
-    left:30%;
-    top: 200px;
-    z-index: 2;
-    font-size: 20px;
+
+.second h1 {
+  color: #ee9f1f;
+  font-style: italic;
+  font-weight: 700;
+  text-shadow: 2px 2px 5px black;
+}
+
+.second h3 {
+  color: white;
+  text-shadow: 2px 2px 5px black;
+}
+
+@keyframes bgAnimation {
+  0% { background-image: url('../../assets/images/shop1.jpg'); }
+  10% { background-image: url('../../assets/images/shop2.jpg'); }
+  25% { background-image: url('../../assets/images/shop3.jpg'); }
+  35% { background-image: url('../../assets/images/shop4.jpg'); }
+  45% { background-image: url('../../assets/images/shop5.jpg'); }
+  65% { background-image: url('../../assets/images/shop6.jpg'); }
+  75% { background-image: url('../../assets/images/shop7.jpg'); }
+  100% { background-image: url('../../assets/images/shop8.jpg'); }
 }

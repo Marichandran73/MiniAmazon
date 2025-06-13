@@ -5,12 +5,16 @@ import Header from './Components/Pages/Header';
 
 import './Components/Pages/Header.css';
 
+import { useCart } from './Context/CartContext'
+
 
 import './Components/Products/Card.css';
 
 
 import Static2 from './Components/Products/Static2';
 import Allproduct from './Components/Products/Allproduct';
+
+
 
 import Footer from './Components/Pages/Footer';
 
@@ -29,25 +33,32 @@ const Dashboard = () => {
     return () => clearInterval(interval); 
   }, []);
 
+  const {
+    cartItems,
+    isCartOpen,
+    openCart,
+    closeCart,
+    saveBill,
+    totalBill,
+    handleQuantityChange
+  } = useCart();
+
   return (
     <>
     <div className="Nav_Section">
-    <Navbar/>
+    <Navbar
+         num={cartItems.reduce((a, b) => a + b.quantity, 0)}
+         onCartClick={openCart}
+          />
     <Header/>
     </div>
 
     <div className="Container">
-  <figure></figure>
-  <figure></figure>
-  <figure></figure>
-  <figure></figure>
-  <figure></figure>
-  <figure></figure>
-  <figure></figure>
+  
     <div className="second">
         <h1>WELCOME TO My shoping platform </h1>
 
-        <h3>The time is: {currDate}</h3> 
+        <h3>The Date is: {currDate}</h3> 
     </div>
   
 </div>

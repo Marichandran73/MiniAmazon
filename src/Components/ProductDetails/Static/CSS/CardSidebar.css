@@ -1,10 +1,10 @@
 .cart-sidebar {
   position: fixed;
   top: 0;
-  right: -700px;
-  min-width:500px;
+  right: -500px;
+  min-width:300px;
   height: 100vh;
-  background: white;
+  background: #edbcbc;
   box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
   transition: right 0.3s ease;
   z-index: 1000;
@@ -46,6 +46,7 @@
   width: 100px;
   height: 100px;
   object-fit: cover;
+  object-position: 50% 10%;
 }
 
 .close-icon {
@@ -67,7 +68,8 @@
   padding: 10px;
 }
 .sub-bill-total button {
-  padding: 5px 10px;
+  height: 30px;
+  width: 30px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -105,17 +107,3 @@
   background-color: #e63900;
 }
 
-@media (max-width:320px){
-  .cart-sidebar{
-    min-width:90%;
-    height:90vh ;
-  }
-}
-
-@media screen and (max-width:373px){
-  .cart-sidebar{
-    min-width:90%;
-    height:90vh;
-  }
-  
-}

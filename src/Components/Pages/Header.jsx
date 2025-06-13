@@ -7,20 +7,15 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const links = [
-    { label: 'Mobiles' },
+    
     { label: 'Fashion', to: "/product/Women'sSaree" },
     { label: 'Electronics', to: "/product/AirConditioner" },
-    { label: 'Home & Kitchen' },
     { label: 'Appliances', to: "/product/WashingMachine" },
     { label: 'Books', to: "/product/OpenBook" },
     { label: 'Beauty', to: "/product/Women'sSaree" },
     { label: 'Toy', to: "/product/ToySet" },
     { label: 'MenWears', to:"/product/Men'sJeans" },
     { label: 'Shoes', to: "/product/Men'sShoes" },
-    { label: 'Computers' },
-    { label: 'Sports'},
-    { label: 'Gift Ideas' },
-    { label: 'Play things' },
   ];
 
   return (

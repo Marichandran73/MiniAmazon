@@ -7,10 +7,9 @@ const CartSidebar = ({ isOpen, closeCart, cartItems, saveBill, totalBill, onQuan
   };
 
   const handleSubItem = (itemId) => {
-    onQuantityChange(itemId, -1); 
+    onQuantityChange(itemId, -1);
   };
 
-  
   return (
     <div className={`cart-sidebar ${isOpen ? 'open' : ''}`}>
       <div className="cart-header">

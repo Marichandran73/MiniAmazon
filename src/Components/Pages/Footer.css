@@ -1,5 +1,5 @@
 .amazon-footer {
-  background-color: #f4f02b;
+  background-color:#aaaaaa;
   color: #ffffff;
   padding: 40px 20px;
   font-family: Arial, sans-serif;
@@ -38,7 +38,7 @@
 
 .footer-column ul li:hover {
   text-decoration: underline;
-  color: blueviolet;
+  color:white;
 }
 
 .footer-bottom {

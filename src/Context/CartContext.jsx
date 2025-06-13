@@ -1,14 +1,22 @@
-import { createContext, useState, useContext, useCallback, useMemo } from 'react';
+import { createContext, useState, useContext, useCallback, useMemo, useEffect } from 'react';
 
 const CartContext = createContext();
 
 export const useCart = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([]);
+
+  const [cartItems, setCartItems] = useState(() => {
+    const savedCart = localStorage.getItem('cartItems');
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+
   const [isCartOpen, setIsCartOpen] = useState(false);
 
- 
+
+  useEffect(() => {
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  }, [cartItems]);
 
   const openCart = useCallback(() => {
     setIsCartOpen(true);
@@ -33,10 +41,21 @@ export const CartProvider = ({ children }) => {
     });
   }, []);
 
+  const handleQuantityChange = useCallback((itemId, change) => {
+    setCartItems((prevCart) =>
+      prevCart.map((item) =>
+        item.id === itemId
+          ? { ...item, quantity: Math.max(item.quantity + change, 1) }
+          : item
+      )
+    );
+  }, []);
+
   const saveBill = useCallback(() => {
     alert("Bill saved!");
     setCartItems([]);
-    closeCart(); 
+    localStorage.removeItem('cartItems');  
+    closeCart();
   }, [closeCart]);
 
   const totalBill = useMemo(() => {
@@ -45,18 +64,6 @@ export const CartProvider = ({ children }) => {
       0
     );
   }, [cartItems]);
-
-
-
-  const handleQuantityChange = (itemId, change) => {
-  setCartItems(prevCart =>
-    prevCart.map(item =>
-      item.id === itemId
-        ? { ...item, quantity: Math.max(item.quantity + change, 1) }
-        : item
-    )
-  );
-};
 
 
 

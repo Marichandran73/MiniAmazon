@@ -69,10 +69,9 @@ const calculateTotal = (items) => {
                 product.name.toLowerCase().includes(search.toLowerCase())
               )
               .map((product) => (
-                <div key={product.id} className="product-card">
+                <div key={product.id} className="product-card" onClick={() => handleClick(product)}>
                   <img
                     src={product.urls}
-                    onClick={() => handleClick(product)}
                     alt={product.name}
                   />
 

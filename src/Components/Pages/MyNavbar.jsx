@@ -17,6 +17,7 @@ const MyNavbar = ({ search, num, onCartClick }) => {
    }
   return (
     <div className="navbar">
+      <div className="location">
       <div className="logo">
         <img
           src={logo1}
@@ -24,12 +25,8 @@ const MyNavbar = ({ search, num, onCartClick }) => {
         />
       </div>
 
-      <div className="location">
-        <FaMapMarkerAlt />
-        <div>
-          <span className="small-text">Deliver to</span>
-          <span className="bold-text">India</span>
-        </div>
+      
+        <h2>StyleMart</h2>
       </div>
 
       <div className="search-bar">
@@ -40,9 +37,7 @@ const MyNavbar = ({ search, num, onCartClick }) => {
         />
         <button><FaSearch /></button>
       </div>
-      {/* <div>
-        <Button variant="danger">SignUp</Button>
-      </div> */}
+
 
       <div className="right-menu">
         <Button variant="danger" onClick={ SwitchSignup }>SignUp</Button>
