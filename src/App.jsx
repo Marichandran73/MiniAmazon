@@ -15,6 +15,7 @@ const SignupLogin = lazy(() => import('./Components/Pages/SignupLogin'));
 const ProductPage = lazy(() => import('./Components/ProductDetails/ProductPage'));
 const SubProduct = lazy(() => import('./Components/ProductDetails/SubProduct'));
 const CartSidebar = lazy(() => import('./Components/ProductDetails/CardSidebar'));
+const UserProfile = lazy(() => import('./Components/User/UserProfile'));
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
             <Route path="/product/:id" element={<ErrorBoundry><ProductPage /></ErrorBoundry>} />
             <Route path="/subproduct/:id" element={<ErrorBoundry><SubProduct /></ErrorBoundry>} />
             <Route path="/cart" element={<ErrorBoundry><CartSidebar /></ErrorBoundry>} />
+            <Route path="/UserProfile" element={<ErrorBoundry><UserProfile /></ErrorBoundry>} />
             <Route path="*" element={<h1>404 Not Found</h1>} />
           </Routes>
         </Suspense>

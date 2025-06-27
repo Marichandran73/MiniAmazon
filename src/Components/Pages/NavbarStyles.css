@@ -109,16 +109,14 @@
 
 
 .cart-icon {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-weight: bold;
-  font-size: 30px;
   cursor: pointer;
   position: relative;
   margin-right: 20px;
   
-  
+}
+.cart-sep{
+  display: flex;
+  gap: 20px;
 }
 
 .cart-icon svg {
@@ -126,6 +124,7 @@
   font-size: 35px;
   color: black;
 }
+
 .head-count{
     position: absolute;
     top: -10px;

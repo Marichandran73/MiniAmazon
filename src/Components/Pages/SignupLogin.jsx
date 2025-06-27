@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
+import  axios from 'axios';
 
 const SignupLogin = () => {
   const navigate = useNavigate(); 
@@ -39,24 +40,52 @@ const SignupLogin = () => {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const validationErrors = validate();
+  const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (Object.keys(validationErrors).length === 0) {
-      if (isLogin) {
-        alert('Login successful');
-        console.log('Login Data:', formData);
-        navigate('/'); 
-      } else {
-        alert('Signup successful');
-        console.log('Signup Data:', formData);
-      }
-      setFormData({ name: '', age: '', email: '', password: '' });
+  const validationErrors = validate();
+  if (Object.keys(validationErrors).length > 0) {
+    setErrors(validationErrors);
+    return;
+  }
+
+  try {
+    if (isLogin) {
+      // Login logic
+      const response = await axios.post("http://localhost:3000/api/user/login", {
+        email: formData.email,
+        password: formData.password,
+      });
+
+      console.log("Login successful:", response.data);
+      alert(response.data.message || "Login successful!");
+
+ 
+      localStorage.setItem("token", response.data.token);
+      navigate("/"); 
+
     } else {
-      setErrors(validationErrors);
+      // Signup logic
+      const response = await axios.post("http://localhost:3000/api/user/signup", {
+        name: formData.name,
+        age: formData.age,
+        email: formData.email,
+        password: formData.password,
+      });
+      console.log("frontend res",response);
+
+      alert(response.data.message || "Signup successful!");
+      setIsLogin(true);
+      setFormData({ name: '', age: '', email: '', password: '' });
     }
-  };
+  } catch (error) {
+    console.log("Error:", error.response?.data?.message || error.message);
+    alert(error.response?.data?.message || "Something went wrong");
+  }
+};
+
+
+  
 
   return (
     <div className="formBody">
@@ -73,6 +102,7 @@ const SignupLogin = () => {
               value={formData.name}
               onChange={handleChange}
               placeholder="Enter your name"
+              autoComplete="name"
             />
             <span>{errors.name}</span>
           </div>
@@ -85,6 +115,7 @@ const SignupLogin = () => {
               value={formData.age}
               onChange={handleChange}
               placeholder="Enter your age"
+              autoComplete="age"
             />
             <span>{errors.age}</span>
           </div>
@@ -99,6 +130,7 @@ const SignupLogin = () => {
           value={formData.email}
           onChange={handleChange}
           placeholder="Enter your email"
+          autoComplete="email"
         />
         <span>{errors.email}</span>
       </div>
@@ -111,6 +143,7 @@ const SignupLogin = () => {
           value={formData.password}
           onChange={handleChange}
           placeholder="Enter your password"
+          autoComplete={isLogin ? "current-password" : "new-password"}
         />
         <span>{errors.password}</span>
       </div>
