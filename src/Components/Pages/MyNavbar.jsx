@@ -7,6 +7,8 @@ import Button from 'react-bootstrap/Button';
 import logo1 from "../assets/images/Shop-Logo.jpg";
 import axios from 'axios';
 
+import { useCart } from '../../context/CartContext';
+
 const MyNavbar = ({ search, num, onCartClick }) => {
   const navigate = useNavigate();
 
@@ -17,7 +19,7 @@ const MyNavbar = ({ search, num, onCartClick }) => {
     const token = localStorage.getItem("token");
     if (token) {
       setLoggedIn(true);
-    } else {
+    } else{
       setLoggedIn(false);
     }
   }, []);
@@ -41,6 +43,16 @@ const MyNavbar = ({ search, num, onCartClick }) => {
       navigate('/Signup');
     }
   }
+    const {
+    cartItems,
+    handleAddToCart,
+    isCartOpen,
+    openCart,
+    closeCart,
+    saveBill,
+    totalBill,
+    handleQuantityChange
+  } = useCart();
 
   return (
     <div className="navbar">

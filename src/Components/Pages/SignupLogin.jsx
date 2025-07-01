@@ -58,9 +58,10 @@ const SignupLogin = () => {
       });
 
       console.log("Login successful:", response.data);
+    
       alert(response.data.message || "Login successful!");
 
- 
+      localStorage.setItem("userId", response.data.user._id);
       localStorage.setItem("token", response.data.token);
       navigate("/"); 
 

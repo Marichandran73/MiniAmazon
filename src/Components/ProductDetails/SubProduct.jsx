@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import Static2 from '../Products/Static2.jsx';
 import './Static/CSS/SubProduct.css';
@@ -12,29 +12,21 @@ import Header from '../Pages/Header';
 import CartSidebar from './CardSidebar'; 
 import '../Pages/NavbarStyles.css';
 
+import { useCart } from '../../context/CartContext';
+
 const SubProduct = () => {
   const { id } = useParams();
-  const [isCartOpen, setIsCartOpen] = useState(false);
-   
 
-
-  const [cartItems, setCartItems] = useState([]);
-
-  const openCart = () => {
-    if (!cartItems.length) {
-      setCartItems([{ ...product, quantity: 1 }]);
-    }
-    setIsCartOpen(true);
-  };
-
-  const closeCart = () => setIsCartOpen(false);
-
-  const saveBill = () => {
-    alert('Bill was saved successfully!');
-    setCartItems([]);
-    setIsCartOpen(false);
-  };
-
+  const {
+    cartItems,
+    handleAddToCart,
+    isCartOpen,
+    openCart,
+    closeCart,
+    saveBill,
+    totalBill,
+    handleQuantityChange,
+  } = useCart();
 
   const product = Static2.flatMap(section => section.images || [])
     .flatMap(image => image.products || [])
@@ -44,16 +36,11 @@ const SubProduct = () => {
     return <div>Product not found</div>;
   }
 
-
-  const totalBill = cartItems.reduce(
-    (total, item) => total + item.quantity * item.price,
-    0
-  );
-
   return (
     <>
       <div className="Nav_Section">
-        <Navbar onCartClick={openCart} />
+        <Navbar onCartClick={openCart} 
+        num={cartItems.reduce((a, b) => a + b.quantity, 0)} />
         <Header />
       </div>
 
@@ -79,7 +66,9 @@ const SubProduct = () => {
             <p>{product.services}</p>
             <p>Rating : 7/10</p>
 
-
+            <button className="add-btn" onClick={() => handleAddToCart(product)}>
+              Add to Cart
+            </button>
             <button className="add-btn" onClick={openCart}>
               Go To Billing
             </button>
@@ -87,16 +76,8 @@ const SubProduct = () => {
         </div>
       </div>
 
+      <CartSidebar />
       <Footer />
-
-      
-      <CartSidebar
-        isOpen={isCartOpen}
-        closeCart={closeCart}
-        cartItems={cartItems}
-        saveBill={saveBill}
-        totalBill={totalBill}
-      />
     </>
   );
 };

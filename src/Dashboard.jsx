@@ -10,6 +10,8 @@ import { useCart } from './Context/CartContext'
 
 import './Components/Products/Card.css';
 
+import CartSidebar from './Components/ProductDetails/CardSidebar';
+
 
 import Static2 from './Components/Products/Static2';
 import Allproduct from './Components/Products/Allproduct';
@@ -32,6 +34,10 @@ const Dashboard = () => {
 
     return () => clearInterval(interval); 
   }, []);
+
+  const calculateTotal = (items) => {
+  return items.reduce((total, item) => total + item.price * item.quantity, 0);
+};
 
   const {
     cartItems,
@@ -73,6 +79,14 @@ const Dashboard = () => {
       caption={section.caption} /> 
   ))}
 </div>
+<CartSidebar
+        isOpen={isCartOpen}
+        closeCart={closeCart}
+        cartItems={cartItems}
+        saveBill={saveBill}
+        totalBill={calculateTotal(cartItems)}
+        onQuantityChange={handleQuantityChange}
+      />
 
 <Footer/>
     </>

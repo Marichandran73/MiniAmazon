@@ -1,21 +1,87 @@
 import './Static/CSS/CardSidebar.css';
 import { MdClose } from 'react-icons/md';
+import { useCart }  from '../../context/CartContext';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
-const CartSidebar = ({ isOpen, closeCart, cartItems, saveBill, totalBill, onQuantityChange }) => {
+import { FaHouseUser } from "react-icons/fa";
+
+
+const CartSidebar = () => {
+
+    const {
+    cartItems,
+    handleAddToCart,
+    isCartOpen,
+    openCart,
+    closeCart,
+    saveBill,
+    totalBill,
+    handleQuantityChange
+  } = useCart();
+
+  
   const handleAddItem = (itemId) => {
-    onQuantityChange(itemId, 1); 
+    handleQuantityChange(itemId, 1); 
+  };
+  
+  const handleSubItem = (itemId) => {
+    handleQuantityChange(itemId, -1);
+  };
+  
+  
+
+  const [userDetail, setUserDetail] = useState(null);
+
+useEffect(() => {
+  const fetchUserProfile = async () => {
+    
+     const userId = localStorage.getItem("userId"); 
+    const token = localStorage.getItem("token");
+
+    if (!userId || !token) return;
+
+    try {
+      const response = await axios.get(`http://localhost:3000/api/user/UserDetails/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log('backend response ',response)
+      setUserDetail(response.data.user); // access "user" key from response
+    } catch (error) {
+      console.error("Error fetching user:", error.response?.data?.message || error.message);
+    }
   };
 
-  const handleSubItem = (itemId) => {
-    onQuantityChange(itemId, -1);
-  };
+  fetchUserProfile();
+}, []);
+
+
 
   return (
-    <div className={`cart-sidebar ${isOpen ? 'open' : ''}`}>
+    <div className={`cart-sidebar ${isCartOpen ? 'open' : ''}`}>
       <div className="cart-header">
         <h2>Your Products</h2>
+
         <MdClose className="close-icon" onClick={closeCart} />
       </div>
+       <div className="top-user-info">
+      {userDetail && (
+        <>
+        <div >
+          <FaHouseUser  className="user-profile"/>
+
+        </div>
+        <div className="user-profile-right">
+          <p><strong>{userDetail.name}</strong></p>
+          <p>{userDetail.email}</p>
+
+        </div>
+        </>
+      )}
+    </div>
+
       <div className="cart-body">
         {cartItems.length === 0 ? (
           <p>Your cart is empty.</p>
