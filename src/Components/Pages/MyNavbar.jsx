@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { FaSearch } from 'react-icons/fa';
-import './NavbarStyles.css';
+import React, { useState, useEffect } from "react";
+import { FaSearch } from "react-icons/fa";
+import "./NavbarStyles.css";
 import { FaCartShopping } from "react-icons/fa6";
-import { useNavigate } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
+import { useNavigate } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 import logo1 from "../assets/images/Shop-Logo.jpg";
-import axios from 'axios';
+import axios from "axios";
 
-import { useCart } from '../../context/CartContext';
+import { useCart } from "../../context/CartContext";
 
 const MyNavbar = ({ search, num, onCartClick }) => {
   const navigate = useNavigate();
@@ -19,39 +19,48 @@ const MyNavbar = ({ search, num, onCartClick }) => {
     const token = localStorage.getItem("token");
     if (token) {
       setLoggedIn(true);
-    } else{
+    } else {
       setLoggedIn(false);
     }
   }, []);
 
   const handleAuthButtonClick = () => {
     if (loggedIn) {
-
       localStorage.removeItem("token");
+      localStorage.removeItem("userId");
+      localStorage.removeItem("cartItems");
       setLoggedIn(false);
-      navigate("/"); 
+
+      if (typeof clearCart === "function") {
+        clearCart();
+      }
+
+      navigate("/");
     } else {
       navigate("/Signup");
     }
   };
 
-  const OnUser=()=>{
+
+
+  const OnUser = () => {
     const token = localStorage.getItem("token");
     if (token) {
-      navigate('/userProfile');
+      navigate("/userProfile");
     } else {
-      navigate('/Signup');
+      navigate("/Signup");
     }
-  }
-    const {
+  };
+  const {
     cartItems,
     handleAddToCart,
     isCartOpen,
     openCart,
     closeCart,
-    saveBill,
+    // saveBill,
     totalBill,
-    handleQuantityChange
+    handleQuantityChange,
+    clearCart,
   } = useCart();
 
   return (
@@ -69,7 +78,9 @@ const MyNavbar = ({ search, num, onCartClick }) => {
           placeholder="Search products..."
           onChange={(e) => search(e.target.value)}
         />
-        <button><FaSearch /></button>
+        <button>
+          <FaSearch />
+        </button>
       </div>
 
       <div className="right-menu">
@@ -84,20 +95,25 @@ const MyNavbar = ({ search, num, onCartClick }) => {
           <span className="small-text">Returns</span>
           <span className="bold-text">& Orders</span>
         </div>
-       
       </div>
 
       <div className=" cart-icon">
-        
-       <div className="cart-sep" >
-        <svg  onClick={OnUser} xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 18 18">
-        <path fill="#941a28"
-        d="M0,18V15.75c0-2.476,4.05-4.5,9-4.5s9,2.025,9,4.5V18ZM4.5,4.5A4.5,4.5,0,1,1,9,9,4.5,4.5,0,0,1,4.5,4.5Z">
-        </path>
-        </svg>
+        <div className="cart-sep">
+          <svg
+            onClick={OnUser}
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            height="30"
+            viewBox="0 0 18 18"
+          >
+            <path
+              fill="#941a28"
+              d="M0,18V15.75c0-2.476,4.05-4.5,9-4.5s9,2.025,9,4.5V18ZM4.5,4.5A4.5,4.5,0,1,1,9,9,4.5,4.5,0,0,1,4.5,4.5Z"
+            ></path>
+          </svg>
 
-        <FaCartShopping onClick={onCartClick} />
-        <h6 className="head-count">{num}</h6>
+          <FaCartShopping onClick={onCartClick} />
+          <h6 className="head-count">{num}</h6>
         </div>
       </div>
     </div>

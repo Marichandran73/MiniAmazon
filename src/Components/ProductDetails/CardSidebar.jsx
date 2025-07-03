@@ -1,15 +1,17 @@
-import './Static/CSS/CardSidebar.css';
-import { MdClose } from 'react-icons/md';
-import { useCart }  from '../../context/CartContext';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import "./Static/CSS/CardSidebar.css";
+import { MdClose } from "react-icons/md";
+import { useCart } from "../../context/CartContext";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import { FaHouseUser } from "react-icons/fa";
-
+import { MdDeleteSweep } from "react-icons/md";
 
 const CartSidebar = () => {
+  const navigate = useNavigate();
 
-    const {
+  const {
     cartItems,
     handleAddToCart,
     isCartOpen,
@@ -17,74 +19,85 @@ const CartSidebar = () => {
     closeCart,
     saveBill,
     totalBill,
-    handleQuantityChange
+    handleQuantityChange,
+    ProductDelete,
   } = useCart();
 
-  
   const handleAddItem = (itemId) => {
-    handleQuantityChange(itemId, 1); 
+    handleQuantityChange(itemId, 1);
   };
-  
+
   const handleSubItem = (itemId) => {
     handleQuantityChange(itemId, -1);
   };
-  
-  
 
   const [userDetail, setUserDetail] = useState(null);
 
-useEffect(() => {
-  const fetchUserProfile = async () => {
-    
-     const userId = localStorage.getItem("userId"); 
-    const token = localStorage.getItem("token");
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      const userId = localStorage.getItem("userId");
+      const token = localStorage.getItem("token");
 
-    if (!userId || !token) return;
+      if (!userId || !token) return;
 
-    try {
-      const response = await axios.get(`http://localhost:3000/api/user/UserDetails/${userId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      console.log('backend response ',response)
-      setUserDetail(response.data.user); // access "user" key from response
-    } catch (error) {
-      console.error("Error fetching user:", error.response?.data?.message || error.message);
-    }
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/api/user/UserDetails/${userId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log("backend response ", response);
+        setUserDetail(response.data.user); // access "user" key from response
+      } catch (error) {
+        console.error(
+          "Error fetching user:",
+          error.response?.data?.message || error.message
+        );
+      }
+    };
+
+    fetchUserProfile();
+  }, []);
+
+  const GotoSignup = () => {
+    navigate("/Signup");
   };
 
-  fetchUserProfile();
-}, []);
-
-
-
   return (
-    <div className={`cart-sidebar ${isCartOpen ? 'open' : ''}`}>
+    <div className={`cart-sidebar ${isCartOpen ? "open" : ""}`}>
       <div className="cart-header">
         <h2>Your Products</h2>
 
         <MdClose className="close-icon" onClick={closeCart} />
       </div>
-       <div className="top-user-info">
-      {userDetail && (
-        <>
-        <div >
-          <FaHouseUser  className="user-profile"/>
-
-        </div>
-        <div className="user-profile-right">
-          <p><strong>{userDetail.name}</strong></p>
-          <p>{userDetail.email}</p>
-
-        </div>
-        </>
-      )}
-    </div>
+      <div className="top-user-info">
+        {userDetail && (
+          <>
+            <div>
+              <FaHouseUser className="user-profile" />
+            </div>
+            <div className="user-profile-right">
+              <p>
+                <strong>{userDetail.name}</strong>
+              </p>
+              <p>{userDetail.email}</p>
+            </div>
+          </>
+        )}
+      </div>
 
       <div className="cart-body">
         {cartItems.length === 0 ? (
-          <p>Your cart is empty.</p>
+          <>
+            <p>Your cart is empty.</p>
+
+            <button className="button-signup" onClick={GotoSignup}>
+              Signup
+            </button>
+          </>
         ) : (
           cartItems.map((item, index) => (
             <div className="cart-item" key={index}>
@@ -92,9 +105,25 @@ useEffect(() => {
               <div className="bill-total">
                 <p>{item.name}</p>
                 <div className="sub-bill-total">
-                  <p>₹{item.price} × {item.quantity}</p>
-                  <button className="btn2 incre-btn" onClick={() => handleAddItem(item.id)}>+</button>
-                  <button className="btn2 incre-btn" onClick={() => handleSubItem(item.id)}>-</button>
+                  <p>
+                    ₹{item.price} × {item.quantity}
+                  </p>
+                  <button
+                    className="btn2 incre-btn"
+                    onClick={() => handleAddItem(item.id)}
+                  >
+                    +
+                  </button>
+                  <button
+                    className="btn2 incre-btn"
+                    onClick={() => handleSubItem(item.id)}
+                  >
+                    -
+                  </button>
+                  <button className="cart-dlt-btn"
+                   onClick={()=> ProductDelete(item.id)}>
+                    <MdDeleteSweep />
+                  </button>
                 </div>
               </div>
             </div>
@@ -104,8 +133,12 @@ useEffect(() => {
       <div className="cart-footer">
         <p>Total: ₹{totalBill}</p>
         <div className="bill-buttons">
-          <button onClick={saveBill} className="save">Save Bill</button>
-          <button onClick={closeCart} className="close">Close</button>
+          <button onClick={saveBill} className="save">
+            Save Bill
+          </button>
+          <button onClick={closeCart} className="close">
+            Close
+          </button>
         </div>
       </div>
     </div>

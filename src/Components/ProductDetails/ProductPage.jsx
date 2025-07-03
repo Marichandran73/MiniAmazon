@@ -1,21 +1,20 @@
-import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import Navbar from '../Pages/MyNavbar';
-import Footer from '../Pages/Footer';
-import Header from '../Pages/Header';
-import CartSidebar from './CardSidebar';
-import Static2 from '../Products/Static2.jsx';
+import React, { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import Navbar from "../Pages/MyNavbar";
+import Footer from "../Pages/Footer";
+import Header from "../Pages/Header";
+import CartSidebar from "./CardSidebar";
+import Static2 from "../Products/Static2.jsx";
 
-import { useCart } from '../../Context/CartContext';
+import { useCart } from "../../Context/CartContext";
 
-import '../Pages/Header.css';
-import './Static/CSS/ProCard.css';
+import "../Pages/Header.css";
+import "./Static/CSS/ProCard.css";
 
 const ProductPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [search, setSearch] = useState('');
-
+  const [search, setSearch] = useState("");
 
   const {
     cartItems,
@@ -25,7 +24,7 @@ const ProductPage = () => {
     closeCart,
     saveBill,
     totalBill,
-    handleQuantityChange
+    handleQuantityChange,
   } = useCart();
 
   const selectedItem = Static2.flatMap((section) => section.images || []).find(
@@ -38,16 +37,13 @@ const ProductPage = () => {
     if (val.id) {
       navigate(`/SubProduct/${val.id}`);
     } else {
-      alert('Product ID not found');
+      alert("Product ID not found");
     }
   };
 
-
-const calculateTotal = (items) => {
-  return items.reduce((total, item) => total + item.price * item.quantity, 0);
-};
-
-
+  const calculateTotal = (items) => {
+    return items.reduce((total, item) => total + item.price * item.quantity, 0);
+  };
 
   return (
     <>
@@ -69,7 +65,7 @@ const calculateTotal = (items) => {
                 product.name.toLowerCase().includes(search.toLowerCase())
               )
               .map((product) => (
-                <div key={product.id} className="product-card" >
+                <div key={product.id} className="product-card">
                   <img
                     src={product.urls}
                     alt={product.name}
@@ -98,7 +94,7 @@ const calculateTotal = (items) => {
         </div>
       </div>
 
-       <CartSidebar
+      <CartSidebar
         isOpen={isCartOpen}
         closeCart={closeCart}
         cartItems={cartItems}
@@ -108,8 +104,6 @@ const calculateTotal = (items) => {
       />
 
       <Footer />
-
-     
     </>
   );
 };

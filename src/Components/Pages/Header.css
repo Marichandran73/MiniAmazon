@@ -85,21 +85,19 @@
     display: none;
   }
 }
-@media  screen and (min-width:600px){
-  .hamburger-icon{
+@media screen and (min-width: 600px) {
+  .hamburger-icon {
     display: none;
   }
-  .header-links{
+  .header-links {
     display: flex;
     justify-content: center;
     flex-wrap: nowrap;
     gap: 20px;
     align-items: center;
   }
-  .header-bar{
+  .header-bar {
     height: 70px;
     justify-content: center;
-    
   }
 }
-

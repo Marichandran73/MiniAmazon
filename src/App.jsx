@@ -1,21 +1,25 @@
-import React, { lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { lazy, Suspense } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import './Components/Pages/SignupLogin.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "./Components/Pages/SignupLogin.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-import ErrorBoundry from './Components/ProductDetails/ErrorBoundry';
+import ErrorBoundry from "./Components/ProductDetails/ErrorBoundry";
 
-import { CartProvider } from './context/CartContext.jsx';
+import { CartProvider } from "./context/CartContext.jsx";
 
 // Lazy-loaded components
-const Dashboard = lazy(() => import('./Dashboard'));
-const Navbars = lazy(() => import('./Components/Pages/MyNavbar'));
-const SignupLogin = lazy(() => import('./Components/Pages/SignupLogin'));
-const ProductPage = lazy(() => import('./Components/ProductDetails/ProductPage'));
-const SubProduct = lazy(() => import('./Components/ProductDetails/SubProduct'));
-const CartSidebar = lazy(() => import('./Components/ProductDetails/CardSidebar'));
-const UserProfile = lazy(() => import('./Components/User/UserProfile'));
+const Dashboard = lazy(() => import("./Dashboard"));
+const Navbars = lazy(() => import("./Components/Pages/MyNavbar"));
+const SignupLogin = lazy(() => import("./Components/Pages/SignupLogin"));
+const ProductPage = lazy(() =>
+  import("./Components/ProductDetails/ProductPage")
+);
+const SubProduct = lazy(() => import("./Components/ProductDetails/SubProduct"));
+const CartSidebar = lazy(() =>
+  import("./Components/ProductDetails/CardSidebar")
+);
+const UserProfile = lazy(() => import("./Components/User/UserProfile"));
 
 const App = () => {
   return (
@@ -24,11 +28,46 @@ const App = () => {
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route path="/Signup" element={<SignupLogin />} />
-            <Route path="/" element={<ErrorBoundry><Dashboard /></ErrorBoundry>} />
-            <Route path="/product/:id" element={<ErrorBoundry><ProductPage /></ErrorBoundry>} />
-            <Route path="/subproduct/:id" element={<ErrorBoundry><SubProduct /></ErrorBoundry>} />
-            <Route path="/cart" element={<ErrorBoundry><CartSidebar /></ErrorBoundry>} />
-            <Route path="/UserProfile" element={<ErrorBoundry><UserProfile /></ErrorBoundry>} />
+            <Route
+              path="/"
+              element={
+                <ErrorBoundry>
+                  <Dashboard />
+                </ErrorBoundry>
+              }
+            />
+            <Route
+              path="/product/:id"
+              element={
+                <ErrorBoundry>
+                  <ProductPage />
+                </ErrorBoundry>
+              }
+            />
+            <Route
+              path="/subproduct/:id"
+              element={
+                <ErrorBoundry>
+                  <SubProduct />
+                </ErrorBoundry>
+              }
+            />
+            <Route
+              path="/cart"
+              element={
+                <ErrorBoundry>
+                  <CartSidebar />
+                </ErrorBoundry>
+              }
+            />
+            <Route
+              path="/UserProfile"
+              element={
+                <ErrorBoundry>
+                  <UserProfile />
+                </ErrorBoundry>
+              }
+            />
             <Route path="*" element={<h1>404 Not Found</h1>} />
           </Routes>
         </Suspense>

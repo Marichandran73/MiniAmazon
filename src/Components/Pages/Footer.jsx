@@ -1,5 +1,5 @@
-import React from 'react';
-import './Footer.css';
+import React from "react";
+import "./Footer.css";
 
 function Footer() {
   return (
@@ -43,7 +43,10 @@ function Footer() {
       </div>
 
       <div className="footer-bottom">
-        <p>&copy; {new Date().getFullYear()} Amazon Clone by Mari Chandran. All rights reserved.</p>
+        <p>
+          &copy; {new Date().getFullYear()} Amazon Clone by Mari Chandran. All
+          rights reserved.
+        </p>
       </div>
     </footer>
   );

@@ -1,12 +1,12 @@
 /* Form Container */
-.formBody{
-  background-image: url('../../assets/images/img1.jpg');
+.formBody {
+  background-image: url("../../assets/images/img1.jpg");
   height: 100vh;
   width: 100%;
   display: flex;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
-  background-position-y:-120px;
+  background-position-y: -120px;
   background-size: cover;
 }
 form {
@@ -16,7 +16,7 @@ form {
   border-radius: 10px;
   background-color: #f9f9f9;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border: 3px ;
+  border: 3px;
   z-index: 999;
 }
 
@@ -68,12 +68,10 @@ form button[type="submit"] {
   cursor: pointer;
   margin-top: 10px;
   transition: background-color 0.3s ease;
-  &:hover{
-   background-color: #0056b3;
+  &:hover {
+    background-color: #0056b3;
   }
 }
-
-
 
 /* Toggle Button */
 form button[type="button"] {
@@ -97,21 +95,19 @@ form p {
   color: #555;
 }
 
-
-
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   padding: 0;
 }
-
 
 .Container {
   position: relative;
   top: 0;
   left: 0;
   width: 100%;
-  height: 90vh; 
+  height: 90vh;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
@@ -121,13 +117,11 @@ html, body {
   z-index: 0;
 }
 
-
 .second {
- position: absolute;
- top: 50%;
- left: 40%;
+  position: absolute;
+  top: 50%;
+  left: 40%;
 }
-
 
 .second h1 {
   color: #ee9f1f;
@@ -142,12 +136,28 @@ html, body {
 }
 
 @keyframes bgAnimation {
-  0% { background-image: url('../../assets/images/shop1.jpg'); }
-  10% { background-image: url('../../assets/images/shop2.jpg'); }
-  25% { background-image: url('../../assets/images/shop3.jpg'); }
-  35% { background-image: url('../../assets/images/shop4.jpg'); }
-  45% { background-image: url('../../assets/images/shop5.jpg'); }
-  65% { background-image: url('../../assets/images/shop6.jpg'); }
-  75% { background-image: url('../../assets/images/shop7.jpg'); }
-  100% { background-image: url('../../assets/images/shop8.jpg'); }
+  0% {
+    background-image: url("../../assets/images/shop1.jpg");
+  }
+  10% {
+    background-image: url("../../assets/images/shop2.jpg");
+  }
+  25% {
+    background-image: url("../../assets/images/shop3.jpg");
+  }
+  35% {
+    background-image: url("../../assets/images/shop4.jpg");
+  }
+  45% {
+    background-image: url("../../assets/images/shop5.jpg");
+  }
+  65% {
+    background-image: url("../../assets/images/shop6.jpg");
+  }
+  75% {
+    background-image: url("../../assets/images/shop7.jpg");
+  }
+  100% {
+    background-image: url("../../assets/images/shop8.jpg");
+  }
 }

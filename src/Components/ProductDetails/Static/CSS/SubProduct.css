@@ -1,10 +1,8 @@
-
-
 .Sub-Head {
   padding: 2rem;
   background-color: #f8f9fa;
   min-height: 100vh;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin-top: 100px;
   min-width: 1500px;
 }
@@ -75,23 +73,22 @@
   color: #555;
 }
 
-.right-limited{
-    min-height: 30px;
-    min-width: 100px;
-    color:white;
-    background-color: #f41717;
-    padding: 5px;
-    outline: none;
-    border: none;
-    border-radius: 5px;
-    margin-bottom: 5px;
+.right-limited {
+  min-height: 30px;
+  min-width: 100px;
+  color: white;
+  background-color: #f41717;
+  padding: 5px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 5px;
 }
-.dlt-btn{
-  color:white;
-  font-size:20px;
-  &:hover{
+.dlt-btn {
+  color: white;
+  font-size: 20px;
+  &:hover {
     color: #f41717;
-
   }
 }
 .Sub-right del {
@@ -109,11 +106,12 @@
   cursor: pointer;
   font-weight: bold;
   transition: background-color 0.3s ease;
-  &:hover{
+  &:hover {
     background-color: #0056b3;
-  }}
+  }
+}
 
-  /* Base styles already apply to large screens (1200px and up) */
+/* Base styles already apply to large screens (1200px and up) */
 
 /* Large desktops and laptops (min-width: 1200px) */
 @media screen and (min-width: 1200px) {
@@ -207,4 +205,3 @@
     min-width: 100%;
   }
 }
-
