@@ -21,7 +21,7 @@ const SignupLogin = () => {
   };
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } =   e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -31,7 +31,7 @@ const SignupLogin = () => {
     if (!formData.password) newErrors.password = "Password is required";
 
     if (!isLogin) {
-      if (!formData.name) newErrors.name = "Name is required";
+      if (!formData.name)  newErrors.name = "Name is required";
       if (!formData.age) newErrors.age = "Age is required";
       else if (isNaN(formData.age) || formData.age <= 0)
         newErrors.age = "Enter a valid age";
@@ -92,6 +92,7 @@ const SignupLogin = () => {
 
   return (
     <div className="formBody">
+     <h2>Welcome to Mini Amazon</h2>
       <form onSubmit={handleSubmit}>
         <h1>{isLogin ? "Login" : "Signup"}</h1>
 
