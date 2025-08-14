@@ -78,7 +78,7 @@ const SignupLogin = () => {
       if (isLogin) {
         // Login API
         const response = await axios.post(
-          "http://localhost:5000/api/user/login", 
+          "https://ecommerce-backend-ab16.onrender.com/api/user/login", 
           {
             email: formData.email,
             password: formData.password,
@@ -93,7 +93,7 @@ const SignupLogin = () => {
       } else {
         // Signup API
         const response = await axios.post(
-          "http://localhost:5000/api/user/signup", 
+          "https://ecommerce-backend-ab16.onrender.com/api/user/signup", 
           formData
         );
 

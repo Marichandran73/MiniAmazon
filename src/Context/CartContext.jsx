@@ -43,7 +43,7 @@ export const CartProvider = ({ children }) => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/user/cart/${userId}`,
+        `https://ecommerce-backend-ab16.onrender.com/api/user/cart/${userId}`,
         {
           method: "GET",
           headers: {
@@ -93,7 +93,7 @@ export const CartProvider = ({ children }) => {
     });
 
     try {
-      await fetch("http://localhost:5000/api/user/cart", {
+      await fetch("https://ecommerce-backend-ab16.onrender.com/api/user/cart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -115,7 +115,7 @@ const ProductDelete = useCallback(async (itemId) => {
   setCartItems((prev) => prev.filter((item) => item.id !== itemId));
 
   try {
-    await fetch(`http://localhost:5000/api/user/cart/delete?userId=${userId}&itemId=${itemId}`, {
+    await fetch(`https://ecommerce-backend-ab16.onrender.com/api/user/cart/delete?userId=${userId}&itemId=${itemId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -143,7 +143,7 @@ const ProductDelete = useCallback(async (itemId) => {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/user/cart/update-quantity",
+        "https://ecommerce-backend-ab16.onrender.com/api/user/cart/update-quantity",
         {
           method: "PUT",
           headers: {

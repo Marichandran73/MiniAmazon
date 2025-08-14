@@ -36,13 +36,13 @@ const CartSidebar = () => {
 useEffect(() => {
   const fetchUserProfile = async () => {
     const userId = localStorage.getItem("userId");
-    
+
     const token = localStorage.getItem("token");
 
     if (!userId || !token) return;
 
     try {
-     fetch(`http://localhost:5000/api/user/userdetails/${userId}`, {
+     fetch(`https://ecommerce-backend-ab16.onrender.com/api/user/userdetails/${userId}`, {
   method: "GET",
   headers: {
     "Content-Type": "application/json",
