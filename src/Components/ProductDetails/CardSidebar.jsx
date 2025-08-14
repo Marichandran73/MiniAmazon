@@ -1,6 +1,6 @@
 import "./Static/CSS/CardSidebar.css";
 import { MdClose } from "react-icons/md";
-import { useCart } from "../../context/CartContext";
+import { useCart } from "../../Context/CartContext";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";

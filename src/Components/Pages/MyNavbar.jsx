@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 import logo1 from "../assets/images/Shop-Logo.jpg";
 import axios from "axios";
 
-import { useCart } from "../../context/CartContext";
+import { useCart } from "../../Context/CartContext";
 
 const MyNavbar = ({ search, num, onCartClick }) => {
   const navigate = useNavigate();

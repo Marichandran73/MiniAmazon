@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import ErrorBoundry from "./Components/ProductDetails/ErrorBoundry";
 
-import { CartProvider } from "./context/CartContext.jsx";
+import { CartProvider } from "./Context/CartContext.jsx";
 
 // Lazy-loaded components
 const Dashboard = lazy(() => import("./Dashboard"));
