@@ -12,7 +12,7 @@ import Header from "../Pages/Header";
 import CartSidebar from "./CardSidebar";
 import "../Pages/NavbarStyles.css";
 
-import { useCart } from "../../context/CartContext";
+import { useCart } from "../../Context/CartContext";
 
 const SubProduct = () => {
   const { id } = useParams();
