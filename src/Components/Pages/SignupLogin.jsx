@@ -9,37 +9,62 @@ const SignupLogin = () => {
   const [formData, setFormData] = useState({
     name: "",
     age: "",
+    contact: "",
     email: "",
     password: "",
   });
   const [errors, setErrors] = useState({});
 
+  // Toggle between Login and Signup
   const toggleForm = () => {
     setIsLogin(!isLogin);
-    setFormData({ name: "", age: "", email: "", password: "" });
+    setFormData({
+      name: "",
+      age: "",
+      contact: "",
+      email: "",
+      password: "",
+    });
     setErrors({});
   };
 
+  // Handle input change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // Validate form
   const validate = () => {
     const newErrors = {};
-    if (!formData.email) newErrors.email = "Email is required";
-    if (!formData.password) newErrors.password = "Password is required";
+
+    if (!formData.email) {
+      newErrors.email = "Email is required";
+    }
+    if (!formData.password) {
+      newErrors.password = "Password is required";
+    }
 
     if (!isLogin) {
-      if (!formData.name) newErrors.name = "Name is required";
-      if (!formData.age) newErrors.age = "Age is required";
-      else if (isNaN(formData.age) || formData.age <= 0)
+      if (!formData.name) {
+        newErrors.name = "Name is required";
+      }
+      if (!formData.age) {
+        newErrors.age = "Age is required";
+      } else if (isNaN(formData.age) || Number(formData.age) <= 0) {
         newErrors.age = "Enter a valid age";
+      }
+      if (!formData.contact) {
+        newErrors.contact = "Contact is required";
+      } else if (!/^\d{10}$/.test(formData.contact)) {
+        newErrors.contact = "Enter a valid 10-digit contact number";
+      }
     }
 
     return newErrors;
   };
 
+  // Submit form
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -51,42 +76,43 @@ const SignupLogin = () => {
 
     try {
       if (isLogin) {
-        // Login logic
+        // Login API
         const response = await axios.post(
-          "http://localhost:3000/api/user/login",
+          "http://localhost:5000/api/user/login", 
           {
             email: formData.email,
             password: formData.password,
           }
         );
-
-        console.log("Login successful:", response.data);
 
         alert(response.data.message || "Login successful!");
-
-        localStorage.setItem("userId", response.data.user._id);
+        localStorage.setItem("userId", response.data.userId);
         localStorage.setItem("token", response.data.token);
+
         navigate("/");
       } else {
-        // Signup logic
+        // Signup API
         const response = await axios.post(
-          "http://localhost:3000/api/user/signup",
-          {
-            name: formData.name,
-            age: formData.age,
-            email: formData.email,
-            password: formData.password,
-          }
+          "http://localhost:5000/api/user/signup", 
+          formData
         );
-        console.log("frontend res", response);
 
         alert(response.data.message || "Signup successful!");
         setIsLogin(true);
-        setFormData({ name: "", age: "", email: "", password: "" });
+        setFormData({
+          name: "",
+          age: "",
+          contact: "",
+          email: "",
+          password: "",
+        });
       }
     } catch (error) {
-      console.log("Error:", error.response?.data?.message || error.message);
-      alert(error.response?.data?.message || "Something went wrong");
+      console.error("Error:", error);
+      alert(
+        error.response?.data?.message ||
+          "Something went wrong. Please try again."
+      );
     }
   };
 
@@ -118,9 +144,22 @@ const SignupLogin = () => {
                 value={formData.age}
                 onChange={handleChange}
                 placeholder="Enter your age"
-                autoComplete="age"
+                autoComplete="off"
               />
               <span>{errors.age}</span>
+            </div>
+
+            <div>
+              <label>Contact:</label>
+              <input
+                type="tel"
+                name="contact"
+                value={formData.contact}
+                onChange={handleChange}
+                placeholder="Enter your contact"
+                autoComplete="tel"
+              />
+              <span>{errors.contact}</span>
             </div>
           </>
         )}
@@ -152,6 +191,7 @@ const SignupLogin = () => {
         </div>
 
         <button type="submit">{isLogin ? "Login" : "Signup"}</button>
+
         <p>
           {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
           <button type="button" onClick={toggleForm}>

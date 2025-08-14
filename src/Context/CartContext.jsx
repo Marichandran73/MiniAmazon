@@ -7,11 +7,7 @@ import {
   useEffect,
 } from "react";
 
-
-
-
 const CartContext = createContext();
-
 export const useCart = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
@@ -19,158 +15,157 @@ export const CartProvider = ({ children }) => {
     const savedCart = localStorage.getItem("cartItems");
     return savedCart ? JSON.parse(savedCart) : [];
   });
-  
+
   const [isCartOpen, setIsCartOpen] = useState(false);
-  
-  
-  const openCart = useCallback(() => {
-    setIsCartOpen(true);
-  }, []);
-  
-  const closeCart = useCallback(() => {
-    setIsCartOpen(false);
-  }, []);
- 
 
-  
+  const openCart = useCallback(() => setIsCartOpen(true), []);
+  const closeCart = useCallback(() => setIsCartOpen(false), []);
+
+  const clearCart = useCallback(() => {
+    setCartItems([]);
+    localStorage.removeItem("cartItems");
+  }, []);
+
+  // Persist cart in localStorage whenever it changes
   useEffect(() => {
-    const fetchUserCart = async () => {
-      const userId = localStorage.getItem("userId");
-      if (!userId) return;
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
 
-      try {
-        const response = await fetch(
-          `http://localhost:3000/api/user/${userId}`
-        );
-        if (response.ok) {
-          const items = await response.json();
-          console.log("User Cart Items:", items);
-          setCartItems(items);
-        } else {
-          console.warn("Cart not found");
+
+
+  // Fetch user cart on mount
+  useEffect(() => {
+  const fetchUserCart = async () => {
+    const userId = localStorage.getItem("userId");
+    const token = localStorage.getItem("token");
+
+    if (!userId || !token) return;
+
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/user/cart/${userId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
         }
-      } catch (err) {
-        console.error("Error fetching user cart:", err);
-      }
-    };
+      );
 
-    fetchUserCart();
+      if (!response.ok) {
+        console.warn("Cart not found", response.status);
+        setCartItems([]);
+        return;
+      }
+
+      const data = await response.json();
+      setCartItems(data.items || []);
+    } catch (err) {
+      console.error("Error fetching user cart:", err);
+    }
+  };
+
+  fetchUserCart();
+}, []);
+
+
+  // Add to cart
+  const handleAddToCart = useCallback(async (product) => {
+    const token = localStorage.getItem("token");
+    const userId = localStorage.getItem("userId");
+
+    if (!token || !userId) {
+      alert("Please login to add items to your cart.");
+      return;
+    }
+
+    setCartItems((prev) => {
+      const existingItem = prev.find((item) => item.id === product.id);
+      if (existingItem) {
+        return prev.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      }
+      return [...prev, { ...product, quantity: 1 }];
+    });
+
+    try {
+      await fetch("http://localhost:5000/api/user/cart", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ userId, item: { ...product, quantity: 1 } }),
+      });
+    } catch (err) {
+      console.error("Failed to sync cart with backend:", err);
+    }
   }, []);
 
-
-  // ADD TO CART FUNCTIONS 
-
-const handleAddToCart = useCallback(async (product) => {
+  // Delete item
+const ProductDelete = useCallback(async (itemId) => {
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
 
-  if (!token || !userId) {
-    alert("Please login to add items to your cart.");
-    return;
-  }
-
-  setCartItems((prevCartItems) => {
-    const existingItem = prevCartItems.find((item) => item.id === product.id);
-    if (existingItem) {
-      return prevCartItems.map((item) =>
-        item.id === product.id
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
-      );
-    } else {
-      return [...prevCartItems, { ...product, quantity: 1 }];
-    }
-  });
+  // Optimistic UI update
+  setCartItems((prev) => prev.filter((item) => item.id !== itemId));
 
   try {
-    await fetch("http://localhost:3000/api/user/Cart", {
-      method: "POST",
+    await fetch(`http://localhost:5000/api/user/cart/delete?userId=${userId}&itemId=${itemId}`, {
+      method: "DELETE",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({
-        userId,
-        item: { ...product, quantity: 1 },
-      }),
     });
   } catch (err) {
-    console.error("Failed to sync cart with backend:", err);
+    console.error("Error deleting item:", err);
   }
 }, []);
 
 
-// delete function  
-
-  const ProductDelete = useCallback(async (itemId) => {
-  setCartItems((prevCartItems) =>
-    prevCartItems.filter((item) => item.id !== itemId)
-  );
-
-  try {
+  // Update quantity
+  const handleQuantityChange = useCallback(async (itemId, change) => {
+    const token = localStorage.getItem("token");
     const userId = localStorage.getItem("userId");
 
-    await fetch("http://localhost:3000/api/user/delete", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ userId, itemId }),
-    });
-  } catch (err) {
-    console.error("Error deleting item from backend:", err);
-  }
-}, []);
-
-// change the quantity 
-
- const handleQuantityChange = useCallback(async (itemId, change) => {
-  const userId = localStorage.getItem("userId");
-
-  setCartItems((prevCart) => {
-    return prevCart.map((item) =>
-      item.id === itemId
-        ? { ...item, quantity: Math.max(item.quantity + change, 1) }
-        : item
+    setCartItems((prev) =>
+      prev.map((item) =>
+        item.id === itemId
+          ? { ...item, quantity: Math.max(item.quantity + change, 1) }
+          : item
+      )
     );
-  });
 
-  try {
-    await fetch("http://localhost:3000/api/user/UpdateQuantity", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userId,
-        itemId,
-        change, // +1 or -1
-      }),
-    });
-  } catch (error) {
-    console.error("Failed to update quantity in backend:", error);
-  }
-}, []);
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/user/cart/update-quantity",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ userId, itemId, change }),
+        }
+      );
 
-  const clearCart = useCallback(() => {
-  setCartItems([]);
-  localStorage.removeItem("cartItems");
-}, []);
+      if (!response.ok) {
+        console.error("Failed to update quantity on server");
+      }
+    } catch (err) {
+      console.error("Failed to update quantity:", err);
+    }
+  }, []);
 
-
-  // const saveBill = useCallback(() => {
-  //   alert("Bill saved!");
-  //   setCartItems([]);
-  //   localStorage.removeItem("cartItems");
-  //   closeCart();
-  // }, [closeCart]);
-
-  const totalBill = useMemo(() => {
-    return cartItems.reduce(
-      (total, item) => total + item.quantity * item.price,
-      0
-    );
-  }, [cartItems]);
+  const totalBill = useMemo(
+    () => cartItems.reduce((total, item) => total + item.quantity * item.price, 0),
+    [cartItems]
+  );
 
   return (
     <CartContext.Provider
@@ -180,7 +175,6 @@ const handleAddToCart = useCallback(async (product) => {
         isCartOpen,
         openCart,
         closeCart,
-        // saveBill,
         totalBill,
         handleQuantityChange,
         ProductDelete,

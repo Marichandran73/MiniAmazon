@@ -33,34 +33,35 @@ const CartSidebar = () => {
 
   const [userDetail, setUserDetail] = useState(null);
 
-  useEffect(() => {
-    const fetchUserProfile = async () => {
-      const userId = localStorage.getItem("userId");
-      const token = localStorage.getItem("token");
+useEffect(() => {
+  const fetchUserProfile = async () => {
+    const userId = localStorage.getItem("userId");
+    
+    const token = localStorage.getItem("token");
 
-      if (!userId || !token) return;
+    if (!userId || !token) return;
 
-      try {
-        const response = await axios.get(
-          `http://localhost:3000/api/user/UserDetails/${userId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        console.log("backend response ", response);
-        setUserDetail(response.data.user); // access "user" key from response
-      } catch (error) {
-        console.error(
-          "Error fetching user:",
-          error.response?.data?.message || error.message
-        );
-      }
-    };
+    try {
+     fetch(`http://localhost:5000/api/user/userdetails/${userId}`, {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${token}`,  
+  },
+})
+.then(res => res.json())
+.then(data => setUserDetail(data.user))
+    } catch (err) {
+      console.error("Error fetching user:", err.message);
+    }
+  };
 
-    fetchUserProfile();
-  }, []);
+  fetchUserProfile();
+}, []);
+
+
+
+
 
   const GotoSignup = () => {
     navigate("/Signup");
