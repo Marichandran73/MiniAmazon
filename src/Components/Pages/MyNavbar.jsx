@@ -89,7 +89,7 @@ const MyNavbar = ({ search, num, onCartClick }) => {
         </Button>
         <div className="menu-item">
           <span className="small-text">Hello, Sign in</span>
-          <span className="bold-text">Account & Lists</span>
+          <span className="bold-text">Account</span>
         </div>
         <div className="menu-item">
           <span className="small-text">Returns</span>
